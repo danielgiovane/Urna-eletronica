@@ -149,3 +149,11 @@ body{
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
+
+.info-oculta {
+  display: none;
+}
+
+.info-normal{
+  display: inline-block;
+}
