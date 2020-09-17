@@ -37,15 +37,18 @@ function templateNumeros(dado, numeroHtml) {
 function obtendoNumeros(e) {
   let elemento = e.target.innerText;
   let elNumero = document.querySelector('.numero.pisca');
-  if (elNumero === null) {
-   
-  }else{
+
+  if (elNumero !== null) {
     elNumero.innerHTML = elemento;
     numero += elemento;
     elNumero.classList.remove('pisca')
-    elNumero.nextElementSibling.classList.add('pisca')
+    if (elNumero.nextElementSibling === null) {
+      atualizaInterface()
+    } else {
+      elNumero.nextElementSibling.classList.add('pisca')
+    }
   }
-  
+
 }
 
 function eventoDeClick(botoes) {
@@ -56,7 +59,8 @@ function eventoDeClick(botoes) {
 
 
 function atualizaInterface() {
-
+  console.log('atualizando interface')
+  console.log(numero)
 }
 
 
