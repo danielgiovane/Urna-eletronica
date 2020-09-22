@@ -19,8 +19,8 @@ function comecarEtapa() {
 
   cargo.innerHTML = dado.titulo;
   informacoes.innerHTML = '';
-  seuVoto.innerHTML = '';
-  aviso.style.display = 'none'
+  seuVoto.style.display = 'none';
+  aviso.style.display = 'none';
   infoLateral.innerHTML = '';
 
   caixaDosNumeros.innerHTML = templateNumeros(dado, numeroHtml);
@@ -60,10 +60,30 @@ function eventoDeClick(botoes) {
 
 function atualizaInterface() {
   const dado = dados[etapaAtual];
-  const candidato = dado.candidatos.filter((candidato) => candidato.numero === parseInt(numero))
-  console.log("candidato", candidato)
+  let candidato = dado.candidatos.filter((candidato) => candidato.numero === parseInt(numero))
+
+  if (candidato.length > 0) {
+    candidato = candidato[0];
+    seuVoto.style.display = 'block'
+    aviso.style.display = 'block'
+    informacoes.innerHTML = `Nome: ${candidato.nome}</br> Partido: ${candidato.partido}`
+    infoLateral.innerHTML = montandoFoto(candidato);
+  }
 }
 
+
+function montandoFoto(candidato) {
+  let montarFoto = '';
+  for (let i in candidato.fotos) {
+    montarFoto += `
+    <div class="cabecalho-direito"> 
+      <div class="image">
+      <img src="./img/${candidato.fotos[i].url}" alt=""> 
+      ${candidato.fotos[i].legenda} 
+      </div>`
+  }
+  return montarFoto;
+}
 
 
 function confirmar(dados) {
