@@ -10,7 +10,6 @@ const infoLateral = document.querySelector('.cabecalho-direito');
 const caixaDosNumeros = document.querySelector('.numeros');
 
 // Variaveis de controle de ambiente
-
 let etapaAtual = 0;
 let numero = '';
 
@@ -58,9 +57,11 @@ function eventoDeClick(botoes) {
 }
 
 
+
 function atualizaInterface() {
-  console.log('atualizando interface')
-  console.log(numero)
+  const dado = dados[etapaAtual];
+  const candidato = dado.candidatos.filter((candidato) => candidato.numero === parseInt(numero))
+  console.log("candidato", candidato)
 }
 
 
