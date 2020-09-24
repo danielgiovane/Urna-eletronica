@@ -16,6 +16,7 @@ const botaoConfirmar = document.querySelector('.botao-confirmar');
 let etapaAtual = 0;
 let numero = '';
 let emBranco = false;
+let votos = [];
 
 function comecarEtapa() {
   let dado = dados[etapaAtual]
@@ -65,6 +66,7 @@ function eventoDeClick(botoes) {
 eventoDeClick(botoes);
 
 
+
 function atualizaInterface() {
   let dado = dados[etapaAtual]
   let candidato = dado.candidatos.filter((candidato) => candidato.numero === parseInt(numero))
@@ -75,7 +77,9 @@ function atualizaInterface() {
     aviso.style.display = 'block'
     informacoes.innerHTML = `Nome: ${candidato.nome}</br> Partido: ${candidato.partido}`
     infoLateral.innerHTML = montandoFoto(candidato);
-  } else {
+  }
+
+  else {
     seuVoto.style.display = 'block'
     aviso.style.display = 'block'
     informacoes.innerHTML = `<div class='aviso pisca'>VOTO NULO</div>`
@@ -105,33 +109,55 @@ function montandoFoto(candidato) {
 function confirmar() {
   let dado = dados[etapaAtual]
   let votoConfirmado = false;
+
   if (emBranco === true) {
     votoConfirmado = true;
+
+    votos.push({
+      etapa: dados[etapaAtual].titulo,
+      voto: 'voto em branco'
+    });
+
   } else if (numero.length === dado.numero) {
     votoConfirmado = true;
-    console.log('numero confirmado', numero)
+
+    votos.push({
+      etapa: dados[etapaAtual].titulo,
+      voto: numero
+    })
+
   } else {
     alert('Digite o numero do canditado/voto em branco/voto nulo')
   }
 
+
   if (votoConfirmado) {
     etapaAtual++
+
     if (dados[etapaAtual] !== undefined) {
       comecarEtapa();
     } else {
       seuVoto.style.display = 'none';
       aviso.style.display = 'none';
-      informacoes.innerHTML = `<div class='fim pisca'>FIM</div>`;
       infoLateral.innerHTML = '';
       caixaDosNumeros.innerHTML = '';
       cargo.innerHTML = '';
+      informacoes.innerHTML = `<div class='fim pisca'>FIM</div>`;
+      guardandoDadosNoLocalStorage(votos);
     }
   }
 }
 
-function corrigir() {
-  comecarEtapa();
+function guardandoDadosNoLocalStorage(array){
+  let myJson = JSON.stringify(array)
+  return localStorage.setItem('meusDados', myJson)
 }
+
+function obtendoDadosNoLocalStorage(nomeDaChave){
+  let valorDaChave = localStorage.getItem(nomeDaChave);
+  return JSON.parse(valorDaChave);
+}
+
 
 function votoEmBranco() {
   if (numero === '') {
@@ -140,11 +166,18 @@ function votoEmBranco() {
     aviso.style.display = 'block';
     caixaDosNumeros.innerHTML = ' ';
     informacoes.innerHTML = `<div class='voto-em-branco pisca'>VOTO EM BRANCO</div>`
-  } else {
+  }
+  else {
     alert('Para votar em BRANCO não pode ter nenhum numero preenchido')
   }
 
 }
+
+
+function corrigir() {
+  comecarEtapa();
+}
+
 
 
 
