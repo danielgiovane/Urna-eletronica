@@ -21,6 +21,7 @@ export let dados = [
       }
     ]
   },
+  
   {
     titulo: 'PREFEITO',
     numero: 2,
@@ -39,28 +40,6 @@ export let dados = [
         partido: 'Direitos-Humanos',
         fotos: [
           {url: '32.jpg', legenda: 'Prefeito', small: false}
-        ]
-      }
-    ]
-  },
-  {
-    titulo: 'VICE-PREFEITO',
-    numero: 3,
-    candidatos: [
-      {
-        numero:222,
-        nome: 'Primo do Sujeito',
-        partido: 'Trabalhador',
-        fotos: [
-          {url: '222.jpg', legenda: 'Vice Prefeito', small: false}
-        ]
-      },
-      {
-        numero:322,
-        nome: 'Primo do Fulano',
-        partido: 'Direitos-Humanos',
-        fotos: [
-          {url: '322.jpg', legenda: 'Vice Prefeito', small: false}
         ]
       }
     ]

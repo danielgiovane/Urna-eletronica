@@ -185,3 +185,9 @@ body{
   font-weight: bold;
   padding-left: 40px;
 }
+
+.fim {
+  font-size: 3.8rem;
+  font-weight: bold;
+  text-align: center;
+}

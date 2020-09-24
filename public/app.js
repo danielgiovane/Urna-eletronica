@@ -18,9 +18,8 @@ let numero = '';
 let emBranco = false;
 
 function comecarEtapa() {
+  let dado = dados[etapaAtual]
   let numeroHtml = '';
-  const dado = dados[etapaAtual];
-
   cargo.innerHTML = dado.titulo;
   informacoes.innerHTML = '';
   seuVoto.style.display = 'none';
@@ -30,7 +29,9 @@ function comecarEtapa() {
   emBranco = false;
 
   caixaDosNumeros.innerHTML = templateNumeros(dado, numeroHtml);
-}
+};
+comecarEtapa();
+
 
 function templateNumeros(dado, numeroHtml) {
   for (let i = 0; i < dado.numero; i++) {
@@ -61,9 +62,11 @@ function eventoDeClick(botoes) {
     numeroDoBotao.addEventListener('click', obtendoNumeros)
   })
 }
+eventoDeClick(botoes);
+
 
 function atualizaInterface() {
-  const dado = dados[etapaAtual];
+  let dado = dados[etapaAtual]
   let candidato = dado.candidatos.filter((candidato) => candidato.numero === parseInt(numero))
 
   if (candidato.length > 0) {
@@ -82,7 +85,7 @@ function atualizaInterface() {
 // adicionado o evento de click 
 botaoCorrigir.addEventListener('click', corrigir)
 botaoConfirmar.addEventListener('click', confirmar)
-botaoBranco.addEventListener('click',votoEmBranco)
+botaoBranco.addEventListener('click', votoEmBranco)
 
 
 function montandoFoto(candidato) {
@@ -98,9 +101,32 @@ function montandoFoto(candidato) {
   return montarFoto;
 }
 
+// confirmando dados do candidato
+function confirmar() {
+  let dado = dados[etapaAtual]
+  let votoConfirmado = false;
+  if (emBranco === true) {
+    votoConfirmado = true;
+  } else if (numero.length === dado.numero) {
+    votoConfirmado = true;
+    console.log('numero confirmado', numero)
+  } else {
+    alert('Digite o numero do canditado/voto em branco/voto nulo')
+  }
 
-function confirmar(dados) {
-
+  if (votoConfirmado) {
+    etapaAtual++
+    if (dados[etapaAtual] !== undefined) {
+      comecarEtapa();
+    } else {
+      seuVoto.style.display = 'none';
+      aviso.style.display = 'none';
+      informacoes.innerHTML = `<div class='fim pisca'>FIM</div>`;
+      infoLateral.innerHTML = '';
+      caixaDosNumeros.innerHTML = '';
+      cargo.innerHTML = '';
+    }
+  }
 }
 
 function corrigir() {
@@ -108,17 +134,19 @@ function corrigir() {
 }
 
 function votoEmBranco() {
-  if(numero === ''){
+  if (numero === '') {
     emBranco = true;
     seuVoto.style.display = 'block';
     aviso.style.display = 'block';
     caixaDosNumeros.innerHTML = ' ';
     informacoes.innerHTML = `<div class='voto-em-branco pisca'>VOTO EM BRANCO</div>`
+  } else {
+    alert('Para votar em BRANCO não pode ter nenhum numero preenchido')
   }
+
 }
 
-comecarEtapa();
-eventoDeClick(botoes)
+
 
 
 
