@@ -8,6 +8,9 @@ const cargo = document.querySelector('.cargo-votado span');
 const aviso = document.querySelector('.rodape');
 const infoLateral = document.querySelector('.cabecalho-direito');
 const caixaDosNumeros = document.querySelector('.numeros');
+const botaoBranco = document.querySelector('.botao-branco');
+const botaoCorrigir = document.querySelector('.botao-corrigir');
+const botaoConfirmar = document.querySelector('.botao-confirmar');
 
 // Variaveis de controle de ambiente
 let etapaAtual = 0;
@@ -22,6 +25,7 @@ function comecarEtapa() {
   seuVoto.style.display = 'none';
   aviso.style.display = 'none';
   infoLateral.innerHTML = '';
+  numero = '';
 
   caixaDosNumeros.innerHTML = templateNumeros(dado, numeroHtml);
 }
@@ -56,8 +60,6 @@ function eventoDeClick(botoes) {
   })
 }
 
-
-
 function atualizaInterface() {
   const dado = dados[etapaAtual];
   let candidato = dado.candidatos.filter((candidato) => candidato.numero === parseInt(numero))
@@ -68,8 +70,17 @@ function atualizaInterface() {
     aviso.style.display = 'block'
     informacoes.innerHTML = `Nome: ${candidato.nome}</br> Partido: ${candidato.partido}`
     infoLateral.innerHTML = montandoFoto(candidato);
+  } else {
+    seuVoto.style.display = 'block'
+    aviso.style.display = 'block'
+    informacoes.innerHTML = `<div class='aviso pisca'>VOTO NULO</div>`
   }
 }
+
+// adicionado o evento de click 
+botaoCorrigir.addEventListener('click', corrigir)
+botaoConfirmar.addEventListener('click', confirmar)
+botaoBranco.addEventListener('click',votoEmBranco)
 
 
 function montandoFoto(candidato) {
@@ -91,7 +102,7 @@ function confirmar(dados) {
 }
 
 function corrigir() {
-
+  comecarEtapa();
 }
 
 function votoEmBranco() {

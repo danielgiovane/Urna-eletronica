@@ -51,6 +51,20 @@ body{
   box-shadow: 3px 3px 0px #000;
 }
 
+.botao-especial {
+  width: 60px;
+  height: 40px;
+  background-color:#fff;
+  color: #000;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #000;
+}
+
 .botao-branco {
   background-color: #fff;
   color: #000;
@@ -74,6 +88,8 @@ body{
   font-weight: bold;
   width: 80px;
 }
+
+
 
 .cabecalho {
   display: flex;
@@ -156,4 +172,10 @@ body{
 
 .info-normal{
   display: inline-block;
+}
+
+.aviso {
+  font-size: 3em;
+  font-weight: bold;
+  padding-top: 10px;
 }
