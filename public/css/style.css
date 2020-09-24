@@ -175,7 +175,13 @@ body{
 }
 
 .aviso {
-  font-size: 3em;
+  font-size: 2.6em;
   font-weight: bold;
   padding-top: 10px;
+}
+
+.voto-em-branco {
+  font-size: 2em;
+  font-weight: bold;
+  padding-left: 40px;
 }

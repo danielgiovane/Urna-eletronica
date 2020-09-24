@@ -15,6 +15,7 @@ const botaoConfirmar = document.querySelector('.botao-confirmar');
 // Variaveis de controle de ambiente
 let etapaAtual = 0;
 let numero = '';
+let emBranco = false;
 
 function comecarEtapa() {
   let numeroHtml = '';
@@ -26,6 +27,7 @@ function comecarEtapa() {
   aviso.style.display = 'none';
   infoLateral.innerHTML = '';
   numero = '';
+  emBranco = false;
 
   caixaDosNumeros.innerHTML = templateNumeros(dado, numeroHtml);
 }
@@ -106,7 +108,13 @@ function corrigir() {
 }
 
 function votoEmBranco() {
-
+  if(numero === ''){
+    emBranco = true;
+    seuVoto.style.display = 'block';
+    aviso.style.display = 'block';
+    caixaDosNumeros.innerHTML = ' ';
+    informacoes.innerHTML = `<div class='voto-em-branco pisca'>VOTO EM BRANCO</div>`
+  }
 }
 
 comecarEtapa();
